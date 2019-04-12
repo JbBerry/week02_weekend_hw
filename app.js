@@ -17,26 +17,45 @@ let players = [player1,player2];
 
 let topTrumps = new Game(players, startingDeck);
 
-let choice;
-
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
 topTrumps.dealCards()
+
 var newTurn = function () {
+// shows current player their card
   topTrumps.startOfTurn();
-  rl.question('chose a statistic: ', function (choice) {
-    topTrumps.takeTurnAction(choice);
-    if (topTrumps.chooseGameWinner() != null){
-      console.log(`CONGRATULATIONS! ${topTrumps.activePlayer.name} has won the game`);
-      return rl.close(); //closing RL and returning from function.
+  let choice;
+// allows the current player to pick a stat, or leave the game
+// does not allow them to make a choice that isn't available
+  rl.question(`choose a statistic: `, function (choice) {
+    switch(player1.selectCatagory(choice)){
+      case `quit`:
+        console.log(`exiting game`);
+        return rl.close();
+        break;
+      case `agility`:
+      case `intelligence`:
+      case `strength`:
+// determines who won the turn and passes both cards to the winner
+        topTrumps.takeTurnAction(player1.selectCatagory(choice));
+        break;
+      default:
+        console.log(`${choice} is not recognised`);
+        break;
+    };
+// checks if we have a winner by seeing if one player holds all the cards
+    if (topTrumps.chooseGameWinner() == null){
+      console.log(`====================`);
+      newTurn();
     }else{
-      console.log(`next turn`);
-      newTurn(); //Calling this function again to ask new question
+      console.log(`====================`);
+      console.log(`CONGRATULATIONS! ${topTrumps.activePlayer.name.toUpperCase()} HAS WON THE GAME`);
+      return rl.close();
     };
   });
 };
 
-newTurn(); //we have to actually start our recursion somehow
+newTurn(); // starts the first turn of the game

@@ -1,9 +1,9 @@
 class Game {
   constructor (players,startingDeck){
-    this.players = players;
-    this.activePlayer = players[0];
+    this.players = players; // array of game players
+    this.activePlayer = players[0]; // 1st player goes first
     this.nonActivePlayer = players[1];
-    this.startingDeck = startingDeck;
+    this.startingDeck = startingDeck; // holds the dek before sharing to the players
   };
 
   dealCards(){
@@ -14,23 +14,20 @@ class Game {
         this.players[1].deck.push(this.startingDeck[index]);
       };
     });
-    // const p1 = this.players[0].deck.map((card) =>{
-    //   return card.name;
-    // });
-    // const p2 = this.players[1].deck.map((card) =>{
-    //   return card.name;
-    // });
-    // console.log(`player1 ${p1}`);
-    // console.log(`player2 ${p2}`);
   };
 
   startOfTurn(){
-    console.log(`${this.activePlayer.name} your card is:`); console.log(`Name: ${this.activePlayer.deck[0].name}`); console.log(`Intelligence: ${this.activePlayer.deck[0].intelligence}`);
+    console.log(`${this.activePlayer.name} your card is:`); console.log(`Name: ${this.activePlayer.deck[0].name}`); console.log(`Agility: ${this.activePlayer.deck[0].agility}`);
+    console.log(`Intelligence: ${this.activePlayer.deck[0].intelligence}`);
     console.log(`Strength: ${this.activePlayer.deck[0].strength}`);
-    console.log(`Agility: ${this.activePlayer.deck[0].agility}`);
   };
 
   chooseBestCard(choice){
+/* could be written
+this.players.forEach(player,index,array)=>{
+if player.deck[0][choice]> ?allOtherPlayers?.deck[0][choice]
+return player });
+*/
     if (this.activePlayer.deck[0][choice]>=this.nonActivePlayer.deck[0][choice]){
       return this.activePlayer;
     }else{
