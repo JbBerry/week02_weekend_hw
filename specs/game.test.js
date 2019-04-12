@@ -16,11 +16,11 @@ describe('Top Trumps', () => {
   let startingDeck
 
   beforeEach(() => {
-    superman = new Card(`Superman`,6,9,7);
-    scarletWitch = new Card(`Scarlet Witch`,7,10,5);
+    superman = new Card(`Superman`,5,10,7);
+    scarletWitch = new Card(`Scarlet Witch`,10,5,7);
     blackWidow = new Card(`Black Widow`,8,6,9);
     theFlash = new Card(`The Flash`,7,4,10);
-    wonderWoman = new Card(`Wonder Woman`,8,7,5);
+    wonderWoman = new Card(`Wonder Woman`,8,8,5);
     batman = new Card(`Batman`,10,7,5);
     startingDeck = [superman, scarletWitch, blackWidow, theFlash, wonderWoman, batman];
 
@@ -40,7 +40,7 @@ describe('Top Trumps', () => {
   });
 
   test('Player 1 should go first', () => {
-    expect(topTrumps.turnWinner).toBe(player1);
+    expect(topTrumps.activePlayer).toBe(player1);
   });
 
   test('be able to deal out a deck of cards evenly', () => {
@@ -51,14 +51,16 @@ describe('Top Trumps', () => {
 
   test('can determine the best card based on a catagory', () => {
     topTrumps.dealCards();
-    expect(topTrumps.chooseBestCard('agility')).toBe(player1);
+    expect(topTrumps.chooseBestCard('strength')).toBe(player1);
     expect(topTrumps.chooseBestCard('intelligence')).toBe(player2);
+    expect(topTrumps.chooseBestCard('agility')).toBe(player1);
+
   });
 
   test('can determine who won the turn', () => {
-    topTrumps.setTurnWinner(player1)
-    expect(topTrumps.turnWinner).toBe(player1);
-    expect(topTrumps.turnLoser).toBe(player2);
+    topTrumps.setTurnWinner(player2)
+    expect(topTrumps.activePlayer).toEqual(player2);
+    expect(topTrumps.nonActivePlayer).toEqual(player1);
   });
 
   test('the game can put the top cards to the bottom of a players deck', () => {
@@ -80,7 +82,8 @@ describe('Top Trumps', () => {
     topTrumps.dealCards();
     topTrumps.cardsToBottomOfDeck(player1,player2)
     topTrumps.cardsToBottomOfDeck(player1,player2)
-    expect(topTrumps.takeTurnAction(`strength`)).toBe(player1)
+    topTrumps.takeTurnAction(`strength`)
+    expect(topTrumps.chooseGameWinner()).toBe(player1)
   });
 
 
