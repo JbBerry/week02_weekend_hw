@@ -23,10 +23,13 @@ class Game {
   };
 
   chooseBestCard(choice){
-/* could be written
-this.players.forEach(player,index,array)=>{
-if player.deck[0][choice]> ?allOtherPlayers?.deck[0][choice]
+/* want to be able to cycle though all players and see if any of their cards are better than the active player.
+(activeplayer wins draws)
+may be able to write as?
+this.players.forEach((player,index,array)=>{
+if player.deck[0][choice]> activePlayer.deck[0][choice]
 return player });
+maybe?
 */
     if (this.activePlayer.deck[0][choice]>=this.nonActivePlayer.deck[0][choice]){
       return this.activePlayer;
@@ -45,6 +48,12 @@ return player });
   };
 
   cardsToBottomOfDeck(){
+/* want to cycle through all players, shift top card and push it to the winner.
+may be able to write as?
+this.players.forEach((player)=>{
+this.activePlayer.deck.push(this.player.deck.shift());
+});
+*/
   this.activePlayer.deck.push(this.activePlayer.deck.shift());
   this.activePlayer.deck.push(this.nonActivePlayer.deck.shift());
   };

@@ -18,10 +18,10 @@ describe('Top Trumps', () => {
   beforeEach(() => {
     superman = new Card(`Superman`,5,10,7);
     scarletWitch = new Card(`Scarlet Witch`,10,5,7);
-    blackWidow = new Card(`Black Widow`,8,6,9);
-    theFlash = new Card(`The Flash`,7,4,10);
-    wonderWoman = new Card(`Wonder Woman`,8,8,5);
-    batman = new Card(`Batman`,10,7,5);
+    blackWidow = new Card(`Black Widow`,5,5,5);
+    theFlash = new Card(`The Flash`,5,5,5);
+    wonderWoman = new Card(`Wonder Woman`,5,10,5);
+    batman = new Card(`Batman`,5,5,5);
     startingDeck = [superman, scarletWitch, blackWidow, theFlash, wonderWoman, batman];
 
     player1 = new Player(`Player one`);

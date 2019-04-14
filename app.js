@@ -22,7 +22,6 @@ var rl = readline.createInterface({
   output: process.stdout
 });
 
-topTrumps.dealCards()
 
 var newTurn = function () {
 // shows current player their card
@@ -58,4 +57,5 @@ var newTurn = function () {
   });
 };
 
+topTrumps.dealCards()
 newTurn(); // starts the first turn of the game
